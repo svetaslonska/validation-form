@@ -1,0 +1,70 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validation Form</title>
+    <style>
+
+        html {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding-top: 200px;
+        }
+        body {
+            background-color: aquamarine;
+        }
+
+        .button {
+            background-color: white;
+            border: border solid black 2xp;
+            border-radius: 10px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        h2 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h2>Validation Form</h2>
+    <form onsubmit="return validateForm()">
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <button type="submit" class="button">Check</button>
+    </form>
+
+    <script>
+        function validatePassword(password) {
+            // Check if the password has at least 8 characters, one uppercase, and one lowercase letter
+            return password.length >= 8 && /[A-Z]/.test(password) && /[a-z]/.test(password);
+        }
+
+        function validateForm() {
+            const firstName = document.getElementById("fname").value;
+            const lastName = document.getElementById("lname").value;
+            const password = document.getElementById("password").value;
+
+            // Check if first name and last name are not missing
+            if (firstName.trim() === '' || lastName.trim() === '') {
+                alert("First name and last name are required!");
+                return false;
+            }
+
+            // Check if the password is valid
+            if (!validatePassword(password)) {
+                alert("Invalid password! Password should have at least 8 characters, one uppercase letter, and one lowercase letter.");
+                return false;
+            }
+
+            // If all validations passed, show success message
+            alert("All fields are valid!");
+            return true;
+        }
+    </script>
+</body>
+</html>
